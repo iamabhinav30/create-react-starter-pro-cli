@@ -1,4 +1,4 @@
-# 🚀 react-starter-pro
+# 🚀 create-react-starter-pro
 
 A production-ready CLI tool to kickstart your next React project in seconds with built-in best practices. Choose between `useReducer + useContext`, `Redux`, or `Redux Toolkit` and optionally include TailwindCSS, ESLint, Husky, and more.
 
@@ -7,7 +7,7 @@ A production-ready CLI tool to kickstart your next React project in seconds with
 ---
 
 ## ✨ Features
-
+🅲🆁🅴🅰🆃🅴-🆁🅴🅰🅲🆃-🆂🆃🅰🆁🆃🅴🆁-🅿🆁🅾
 * ✅ Choose between `useReducer + useContext`, `Redux`, or `Redux Toolkit`
 * ✅ Scaffolds a clean React + TypeScript architecture
 * ✅ Supports ESLint, Prettier, Husky, TailwindCSS, React Router
@@ -42,10 +42,10 @@ This will prompt you to select:
 *  Choose a project setup:
    * useReducer + useContext
    *    Redux
-    * Redux Toolkit
-    * Include extra tools:
+   * Redux Toolkit
+   * Include extra tools:
         * ESLint + Prettier
-        *  Husky Pre-commit hooks
+        * Husky Pre-commit hooks
         * Tailwind CSS
         * React Router
 * Do you want to run "npm install"? (Y/n)
@@ -54,12 +54,12 @@ This will prompt you to select:
 ## 🔧 Supported Templates
 
 * useReducer + useContext
-* Redux
-* Redux Toolkit
+* Redux (Coming up)
+* Redux Toolkit (Coming up)
 
 ---
 
-## 🧠 Extend With
+## 🧠 Future Extended With
 
 * React Query / TanStack Query
 * Firebase Auth / JWT Auth

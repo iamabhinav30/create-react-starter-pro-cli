@@ -16,6 +16,8 @@ import { promptUser } from '../utils/prompts.js';                // Handles user
 import { copyTemplate } from '../utils/copyTemplate.js';         // Copies the selected project template to the target folder
 import { installDeps } from '../utils/installDeps.js';           // Installs dependencies and optional dev tools
 import { addGitignore } from '../utils/addGitignore.js';         // Generates a default .gitignore securely
+import { configureTools } from '../utils/configureTools.js';     // Selectively configures chosen tools
+
 
 import path from 'path';                                         // Native Node module for handling file paths
 import chalk from 'chalk';                                       // Colorful and readable terminal messages
@@ -61,7 +63,10 @@ if (options.installDeps) {
   console.log(chalk.whiteBright(`   cd ${options.projectName} && npm install\n`));
 }
 
-// ✅ Step 7: Done — final success message with next steps
+// 🔧 Step 7: Conditionally scaffold tools like ESLint, Tailwind, Husky, etc.
+await configureTools(targetPath, options.tools);
+
+// ✅ Step 8: Done — final success message with next steps
 console.log(chalk.greenBright(`\n✅ Success! Your React project "${options.projectName}" is ready.`));
 console.log(chalk.gray('\n👉 Next Steps:'));
 console.log(chalk.white(`

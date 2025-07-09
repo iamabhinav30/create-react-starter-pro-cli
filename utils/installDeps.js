@@ -1,44 +1,74 @@
 /**
  * 📦 Utility: installDeps
  * ------------------------
- * This function installs all necessary npm dependencies inside the target
- * project directory. It can also install optional dev tools like Husky
- * based on user selection.
- * 
+ * Installs core React dependencies along with optional tools
+ * like ESLint, Tailwind, Husky, and React Router — based on user selection.
+ *
  * 🧠 Used in: bin/index.js
  *
  * SOLID Principles:
- * 🔸 S — Single Responsibility: Focuses only on dependency-related setup
- * 🔸 O — Open for Extension: Can support more tools (like Tailwind, ESLint)
- * 🔸 I — Interface Segregation: Doesn't deal with project structure or scaffolding
- * 🔸 D — Dependency Inversion: Uses `execa` abstracted process runner
+ * 🔸 S — Single Responsibility: Handles only package installations
+ * 🔸 O — Open for Extension: Easily extendable for new tools
+ * 🔸 L — Liskov Substitution: Respects input contract (targetPath, tools[])
+ * 🔸 I — Interface Segregation: Doesn’t manage file structure or prompts
+ * 🔸 D — Dependency Inversion: Uses `execa` to abstract away process execution
  */
 
 export async function installDeps(targetPath, tools = []) {
   const { execa } = await import('execa'); // Dynamically import to support ESM
+  const baseDeps = ['react', 'react-dom'];
+  const devDeps = [];
 
-  // 📦 Step 1: Run npm install inside the generated project directory
-  console.log(`🔧 Installing dependencies in ${targetPath}...`);
-  await execa('npm', ['install'], {
-    cwd: targetPath,
-    stdio: 'inherit', // Show real-time logs from terminal
-  });
+  // 🧠 Optional tool-specific dependencies
+  if (tools.includes('eslint')) {
+    devDeps.push('eslint', 'eslint-plugin-react');
+  }
 
-  // 🪝 Step 2: If user opted for Husky, set it up using husky-init
+  if (tools.includes('tailwind')) {
+    devDeps.push('tailwindcss', 'postcss', 'autoprefixer');
+  }
+
+  if (tools.includes('router')) {
+    baseDeps.push('react-router-dom');
+  }
+
   if (tools.includes('husky')) {
-    console.log('🪝 Setting up Husky for Git hooks...');
+    // husky will be initialized separately after main install
+    devDeps.push('husky');
+  }
+
+  // 📦 Step 1: Install base dependencies
+  if (baseDeps.length > 0) {
+    console.log(`📦 Installing core dependencies: ${baseDeps.join(', ')}`);
+    await execa('npm', ['install', ...baseDeps], {
+      cwd: targetPath,
+      stdio: 'inherit',
+    });
+  }
+
+  // 🛠️ Step 2: Install dev dependencies
+  if (devDeps.length > 0) {
+    console.log(`🛠️  Installing dev tools: ${devDeps.join(', ')}`);
+    await execa('npm', ['install', '-D', ...devDeps], {
+      cwd: targetPath,
+      stdio: 'inherit',
+    });
+  }
+
+  // 🪝 Step 3: Run husky-init script if selected
+  if (tools.includes('husky')) {
+    console.log('🔧 Initializing Husky Git hooks...');
     await execa('npx', ['husky-init'], {
       cwd: targetPath,
       stdio: 'inherit',
     });
 
-    // 📦 Install husky as a dev dependency after init
+    // Re-run install to finalize hooks
     await execa('npm', ['install'], {
       cwd: targetPath,
       stdio: 'inherit',
     });
   }
 
-  // ✅ Done
-  console.log('\n✅ Dependencies and tools installed successfully!\n');
+  console.log('\n✅ All dependencies and tools have been installed successfully!\n');
 }

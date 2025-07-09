@@ -43,11 +43,11 @@ export async function promptUser() {
         {
             name: 'template',
             type: 'list',
-            message: '🧱 Choose a project setup:',
+            message: 'Choose a project setup:',
             choices: [
-                { name: 'useReducer + useContext (Minimal Global State)', value: 'reducer' },
-                { name: 'Redux (Standard Setup) --> Coming soon', value: 'redux' },
-                { name: 'Redux Toolkit (Modern & Recommended)  --> Coming soon', value: 'redux-toolkit' }
+                { name: 'useReducer + useContext', value: 'reducer' },
+                { name: 'Redux', value: 'redux', disabled: '🚧 Coming Soon' },
+                { name: 'Redux Toolkit', value: 'redux-toolkit', disabled: '🚧 Coming Soon' }
             ]
         },
 
