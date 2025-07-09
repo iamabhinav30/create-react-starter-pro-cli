@@ -9,7 +9,7 @@ export async function configureTools(targetPath, tools = []) {
         await addTailwind(targetPath);
     }
     if (tools.includes('husky')) {
-        await addHuskyScripts(targetPath); // Adds prepare script, .husky folder is added during install
+        await addHuskyScripts(targetPath);
     }
     if (tools.includes('router')) {
         await addRouterFiles(targetPath);

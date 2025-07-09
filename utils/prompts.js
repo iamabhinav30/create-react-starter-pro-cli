@@ -57,12 +57,14 @@ export async function promptUser() {
             type: 'checkbox',
             message: '🛠️  Include extra tools?',
             choices: [
-                { name: 'ESLint + Prettier (Code quality & formatting)', value: 'eslint' },
-                { name: 'Husky Pre-commit hooks (Git automation)', value: 'husky' },
-                { name: 'Tailwind CSS (Utility-first CSS)', value: 'tailwind' },
-                { name: 'Routing (React Router)', value: 'router' }
+                { name: 'None (no extra tools)', value: 'none' }, // ✅ ENABLED
+                { name: 'ESLint + Prettier (Coming Soon)', value: 'eslint', disabled: '🚧 Coming Soon' },
+                { name: 'Husky Pre-commit hooks (Coming Soon)', value: 'husky', disabled: '🚧 Coming Soon' },
+                { name: 'Tailwind CSS (Coming Soon)', value: 'tailwind', disabled: '🚧 Coming Soon' },
+                { name: 'Routing (React Router) (Coming Soon)', value: 'router', disabled: '🚧 Coming Soon' }
             ]
         },
+
         {
             name: 'installDeps',
             type: 'confirm',

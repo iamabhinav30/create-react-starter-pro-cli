@@ -31,10 +31,30 @@ const __dirname = dirname(__filename);
 
 // ✨ Intro message
 console.log(chalk.cyanBright('\n🌟 Welcome to react-starter-pro — A Powerful React Project Generator!\n'));
+
 console.log(chalk.gray('📘 Tip: Use arrow keys and spacebar to select options during prompts.\n'));
 
 // 🧾 Step 1: Prompt user for project configuration
 const options = await promptUser();
+if (options.tools.includes('none')) {
+  options.tools = []; // Reset to empty if 'None' is chosen
+}
+// 🎯 Show user-selected summary
+console.log(chalk.blueBright(`\n📋 Project Summary:`));
+console.log(chalk.white(`📁 Project Name: ${chalk.green(options.projectName)}`));
+console.log(chalk.white(`📦 Project Template: ${chalk.green(options.template)}`));
+
+if (options.tools.length > 0) {
+  console.log(chalk.white(`🛠️  Tools Selected:`));
+  options.tools.forEach(tool => {
+    console.log(`   - ${chalk.yellow(tool)}`);
+  });
+} else {
+  console.log(chalk.gray('🛠️  No extra tools selected.'));
+}
+
+console.log(chalk.white(`📦 Auto Install: ${options.installDeps ? chalk.green('Yes') : chalk.red('No')}`));
+
 
 // 📁 Step 2: Resolve paths
 const templatePath = path.join(__dirname, '..', 'templates', options.template);     // Template to copy

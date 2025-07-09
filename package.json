@@ -1,6 +1,6 @@
 {
   "name": "create-react-starter-pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful React starter CLI with context/reducer, redux, tailwind, husky, and more.",
   "main": "bin/index.js",
  "scripts": {

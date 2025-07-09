@@ -18,7 +18,7 @@ A production-ready CLI tool to kickstart your next React project in seconds with
 
 ## 📦 Installation
 
-npm install -g react-starter-pro
+npm install -g create-react-starter-pro
 
 ---
 
